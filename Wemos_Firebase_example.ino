@@ -6,8 +6,6 @@
 #define WIFI_SSID "와이파이 SSID" // 연결 가능한 wifi의 ssid
 #define WIFI_PASSWORD "와이파이비밀번호" // wifi 비밀번호
 
-#define pinSW1  D2
-#define pinSW2  D3
 #define pinLED1 D4
 #define pinLED2 D7
 #define pinCDS  A0
@@ -49,12 +47,32 @@ void setup() // wifi 접속 과정.
 
 void loop()
 {
-  Firebase.setBool(firebaseData, "Switch Left", !digitalRead(pinSW1));
-  digitalWrite(pinLED1,firebaseData.boolData());
-  
-  Firebase.setBool(firebaseData, "Switch Right", !digitalRead(pinSW2));
-  digitalWrite(pinLED2,firebaseData.boolData());
+ if(Firebase.getBool(firebaseData,"LED1")) {
+  bool valLED1 = firebase.boolData();
+  digitalWrite(pinLED1, valLED1);
+ }
 
-  Firebase.setInt(firebaseData, "Brightness", analogRead(pinCDS));
-  delay(1000); // 1초마다 반복
+ if(Firebase.getBool(firebaseData, "LED2")) {
+  bool valLED2 = firebase.boolData();
+  digitalWrite(pinLED2, valLED2);
+ } 
+ 
+/* if(Firebase.getInt(firebaseData, "Int Data Tag")){
+  int valInt = firebase.intData();
+  // write Code...
+ }
+ if(Firebase.getFloat(firebaseData, "Float Data Tag")){
+  float valFloat = firebase.floatData();
+  // write Code...
+ }
+ if(Firebase.getString(firebaseData, "String Data Tag")){
+  String valStr = firebase.stringData();
+  // write Code...
+ }*/
+
+ //Firebase.setBool(firebaseData, "BoolData", /*Bool Data*/);
+ Firebase.setInt(firebaseData, "Brightness", analogRead(pinCDS));
+ //Firebase.setFloat(firebaseData, "FloatData", /*Float Data*/);
+ //Firebase.setString(firebaseData, "StringData", /*String Data*/);
+ delay(1000); // 1초마다 반복
 }

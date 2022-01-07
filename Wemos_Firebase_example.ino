@@ -33,8 +33,6 @@ void setup() // wifi 접속 과정.
 
   pinMode(pinLED1, OUTPUT);
   pinMode(pinLED2, OUTPUT);
-  pinMode(pinSW1, INPUT);
-  pinMode(pinSW2, INPUT);
  
   Firebase.begin(FIREBASE_HOST, FIREBASE_AUTH);
   Firebase.reconnectWiFi(true);
@@ -48,25 +46,25 @@ void setup() // wifi 접속 과정.
 void loop()
 {
  if(Firebase.getBool(firebaseData,"LED1")) {
-  bool valLED1 = firebase.boolData();
+  bool valLED1 = firebaseData.boolData();
   digitalWrite(pinLED1, valLED1);
  }
 
  if(Firebase.getBool(firebaseData, "LED2")) {
-  bool valLED2 = firebase.boolData();
+  bool valLED2 = firebaseData.boolData();
   digitalWrite(pinLED2, valLED2);
  } 
  
 /* if(Firebase.getInt(firebaseData, "Int Data Tag")){
-  int valInt = firebase.intData();
+  int valInt = firebaseData.intData();
   // write Code...
  }
  if(Firebase.getFloat(firebaseData, "Float Data Tag")){
-  float valFloat = firebase.floatData();
+  float valFloat = firebaseData.floatData();
   // write Code...
  }
  if(Firebase.getString(firebaseData, "String Data Tag")){
-  String valStr = firebase.stringData();
+  String valStr = firebaseData.stringData();
   // write Code...
  }*/
 
